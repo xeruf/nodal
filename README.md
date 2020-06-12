@@ -26,6 +26,10 @@ If you want to divide your task list into areas, these can simply be uncompletab
 
 With everything being a task, areas and projects can also have all kinds of tags and attributes. And then subtasks may inherit these attributes (particularly tags).
 
+More fundamentals:
+- UNIX philosophy: use plain text is possible, separate into independent modules
+- Complete control: Inbuilt reports and attributes should use available configuration, so that the user can change fundamental parts of the system
+
 ## Task attributes
 
 A task has attributes, and each attribute is of one of the following types: 
