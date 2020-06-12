@@ -117,7 +117,7 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
 
 # Links
 
-taskwarrior: https://taskwarrior.org/
-https://tasklite.org/related.html
+[taskwarrior]: https://taskwarrior.org/  
+https://tasklite.org/related.html  
 https://www.wired.com/2016/03/best-to-do-list-app/
 
