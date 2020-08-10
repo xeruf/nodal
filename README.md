@@ -70,13 +70,11 @@ Custom attributes
 - Find out tasks to batch when going out
 - Find things I can do when I am (outside watching the babies e.g. cut nails | focused, wanting to do some (writing|programming) in the morning | unfocused in the afternoon e.g. check mails | taking a break from work on the computer e.g. do laundry | eating/snacking something e.g. watch a video/read a paper | listening to an audiobook e.g. digging, hang out the laundry)
 
-
 # Commands
 
+`add <mods>` - add a new task under the currently selected one
 
-`add <desc> <mods>` - add a new task
-
-`<id> add <desc> <mods>` - add a new task with <id> as parent
+`<id> add <mods>` - add a new task with <id> as parent
 
 ## Selected Task
 
