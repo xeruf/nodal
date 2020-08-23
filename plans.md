@@ -2,20 +2,28 @@
 
 The implementation is split into two parts:
 
-The [plumber][plumbing], wrapping low-level storage/database access to the database and providing commands such as:
+The [plumber][plumbing], wrapping low-level storage/database access to the database in verbose commands, and the porcelain, providing a pretty interface to it.
+
+## Underlying implementation - [plumbing]
+
+Provides commands such as:
 - add <mods> -> add a new task
 - <filter> modify <mods> -> modify task metadata
 - prune -> delete tasks with status:deleted permanently
 - <filter> get <prop> -> gets a property of the first task matching the filter
 
-## Underlying implementation - [plumbing]
-
 ### Tasklite
 
-To speed up development, I am planning to use [tasklite] under the hood for now rather than developing my own plumbing tool.
+To speed up development, I am considering [tasklite] under the hood for now rather than developing my own plumbing tool.
 
 Additional relevant commands:
 - runsql -> providing low-level access
+
+### Taskwarrior
+
+Since I am currently running [taskwarrior], this might also be a good foundation. It is also more tolerant about custom properties than Tasklite.
+
+It has worse performance and some shortcomings, but these can mostly be addressed by the porcelain layer. A weak point however is that access isn't as powerful as with SQL, e.g. listing all subtasks of a parent can't be done as easily.
 
 ## Taskporc/Tofu
 
@@ -79,8 +87,66 @@ size.shorthand=s
 
 Adds support for reports, which can also be configured in a separate config file. They can specify queries, limits, sorting and which properties to display.
 
-Especially important is the support for tree displaying -> using the parent relation, as well as the 
+Especially important is the support for tree displaying -> using the parent relation, as well as incorporating datestamps of parents.
 
+### Configuration
+HOME=$XDG_CONFIG_HOME/tofo
+
+$HOME/\*rc for general configuration - multiple files allow cleaner config
+-> alternative: directory structure mimicking DOM for UNIX-style, but worse performance
+
+$HOME/hooks contains hooks:
+- on-start/on-exit
+- on-change (any task change, add or mod)
+- on-add (new task)
+- on-mod (existing task changed)
+
+$XDG_CACHE_HOME may contain the current state (context/entered task), since resetting that does no harm. Depending on the implementation, it could also hold a cache of the compiled rc.
+
+# General plans
+
+## Task attributes
+
+A task has attributes, and each attribute is of one of the following types: 
+- string, timestamp, number, date, list (of strings)
+- it should be possible to restrict a property to a set of values (enum)
+
+### Special attributes
+- uid: string-computed (ulid/uuid)
+- id: string (generated automatically, user-friendly but can be changed)
+- parent: string
+- entered, modified: timestamp
+- urgency: number-computed
+- status: enum-string-computed
+- virtual tags?
+- completable: boolean
+
+### Standard attributes
+- tags: list
+- annotations: list
+- wait,scheduled,due,until,recur: timestamp
+- relativeRecur: boolean
+- start,stop: timestamp
+
+### Custom attributes
+- priority, size: enum-string
+- url: string
+
+## Command ideas
+- `add <mods>`: add a new task under the currently selected one
+- `<id> add <mods>`: add a new task with <id> as parent
+
+### Selected Task
+If there is no selected task, the selected task is assumed to be an empty invisible root task
+- `cd <id>`: select the given task (alternative names: open,select,ct("change task"))
+- `show`: show details for the currently selected task (maybe also subtasks)
+- `list`: list all direct subtasks
+- `tree`: recursively list subtasks
+
+### More commands
+
+For more, see [taskwarrior] for now...
 
 [tasklite]: https://tasklite.org
 [plumbing]: https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain
+[taskwarrior]: https://taskwarrior.org/  

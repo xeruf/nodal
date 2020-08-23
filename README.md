@@ -18,7 +18,7 @@ For that, a task management system needs to enable these three actions:
 
 # Design
 
-The most important rule: Everything is a task. There is nothing else.  
+The most important rule: Everything is a task. There is nothing else.
 
 Projects, Areas, Epics - they can all be mapped onto tasks, and doing so will allow you to leverage the same toolset on everything.
 A project or epic is a completable task with subtasks - it can itself be a subtask.  
@@ -30,67 +30,33 @@ More fundamentals:
 - UNIX philosophy: use plain text is possible, separate into independent modules
 - Complete control: Inbuilt reports and attributes should use available configuration, so that the user can change fundamental parts of the system
 
-## Task attributes
+## Task types
+There are essentially 4 types of things we do:
+- tasks: things to be done once e.g. hand in an assignment, fix a bug
+- activities: can't be completed e.g. browse the internet, gaming, spend time with family
+- habits: repeat in a set interval, e.g. go for a run daily, pay rent - sometimes skippable
+- chores: recur in regular intervals without a strict due date, e.g. do laundry, cut nails - can be postponed but not skipped
 
-A task has attributes, and each attribute is of one of the following types: 
-- string, timestamp, number, date
-- a list of each of these(or only string?) is possible as well
-- it should be possible to restrict a property to a set of values (enum)
+Even though they won't be clearly distinguished by a single property, they will be mapped through some default properties:
+- Inspired by [tasklite](https://tasklite.org/concepts.html), habits have a `repeat` property while chores have a `recur` property - both can be frozen.
+- Tasks and activities may be distinguished by a `size` property, where activities have a special size value of `-`, marking them incompletable. Alternatively, activities may be prefixed with a star as it is done in Todoist
 
-Special attributes:
-- id: string
-- parent: string
-- entered, modified: timestamp
-- urgency: number-computed
-- status: enum-string-computed
-- virtual tags?
-- completable: boolean
+These basic types also incorporate other types:
+- an area is simply an activity with subtasks
+- a project is a task with subtasks
 
-Standard attributes:
-- tags: list-string
-- annotations: list-string
-- wait,scheduled,due,until,recur: timestamp
-- relativeRecur: boolean
-- start,stop: timestamp
-
-Custom attributes
-- priority, size: enum-string
-- url: string
+Since "task" is one of these types, entities of any of these types can be called "items" within the implementation to avoid confusion.
 
 ## User Stories
-
 - areas
 - housework projects
 - GTD
 - Agile
 
-## Reports I need
-
+### Reports I need
 - Review active projects
 - Find out tasks to batch when going out
 - Find things I can do when I am (outside watching the babies e.g. cut nails | focused, wanting to do some (writing|programming) in the morning | unfocused in the afternoon e.g. check mails | taking a break from work on the computer e.g. do laundry | eating/snacking something e.g. watch a video/read a paper | listening to an audiobook e.g. digging, hang out the laundry)
-
-# Commands
-
-`add <mods>` - add a new task under the currently selected one
-
-`<id> add <mods>` - add a new task with <id> as parent
-
-## Selected Task
-
-If there is no selected task, the selected task is assumed to be an empty invisible root task
-
-`cd <id>` - select the given task (alternative names: open,select,ct("change task"))
-
-`show` - show details for the currently selected task (maybe also subtasks)
-
-`list` - list all direct subtasks
-
-`tree` - recursively list subtasks
-
-## More commands
-
-For more, see [taskwarrior] for now...
 
 # Inspirations
 
@@ -100,12 +66,12 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
 
 ### Issues
 
-- A big issue holding me back is a missing notion of subtasks. You either have to use projects, dependencies or create a complete custom hack - either a script or hook.
+- A big issue holding me back is a missing notion of subtasks. You either have to use projects, dependencies or create a complete custom hack - either a script or hook. This also makes entering tasks more verbose as I have to specify multiple tags repeatedly which could otherwise simply be inherited.
 - Recurrence is a longstanding issue, but can somewhat be solved by plugins: https://github.com/tbabej/task.shift-recurrence and https://github.com/JensErat/task-relative-recur
 - UDAs have a lot less options than inbuilt properties
 - CLI can be too verbose: I am missing some way to set shorthands for attributes, e.g. "p" for project, dates are rather inflexible
 - Keeping all reports aligned with custom attributes is a hassle, since you can't base reports off each other
-- ids shift around annoyingly, so you constantly have to look them up
+- ids change whenever a task is completed, so you constantly have double-check or might complete a wrong task
 
 ### What it does well
 
@@ -118,4 +84,3 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
 [taskwarrior]: https://taskwarrior.org/  
 https://tasklite.org/related.html  
 https://www.wired.com/2016/03/best-to-do-list-app/
-

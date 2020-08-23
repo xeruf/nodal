@@ -1,0 +1,18 @@
+# This is a documentation by example of the DOM of Tofo
+
+attribute.all.type=string
+attribute.all.order=desc
+attribute.all.string.order=asc
+attribute.all.date.order=asc
+
+attribute.sched.type=date
+
+context.default=
+context.work=+work +pc
+context.config=+config +pc
+
+report.default=.next
+report.next=type:task
+
+item.all.target=.sched || .due
+
