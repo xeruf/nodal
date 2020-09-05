@@ -16,6 +16,11 @@ For that, a task management system needs to enable these three actions:
 - planning & reviewing
 - retrieving tasks that should be done and can be done in the current context
 
+My problem is that I don't trust any of the systems I am currently using:
+- head: I forget things, short-term memory limited
+- paper: many slips flying around, can get lost easily
+- CLIs: too verbose to use, didn't get me the information I needed in time
+
 # Design
 
 The most important rule: Everything is a task. There is nothing else.
@@ -86,4 +91,5 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
   Should have a look at:
   - org mode
   - taskell
+- https://github.com/lyz-code/pydo: new tool, short ids
 - https://www.wired.com/2016/03/best-to-do-list-app/: Why technology 

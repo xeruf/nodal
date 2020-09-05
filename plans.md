@@ -46,10 +46,10 @@ Automatically generates short ids for new tasks based on description - first ini
 ### Commands
 
 Most commands are specified in a default config file, and even most standard commands are aliases:
-- _delete_=modify status:delete
+- _delete_=modify status:deleted
 - _do_/_done_=modify status:done
 - _log_=add status:done
-- _addx_=add status:incompletable  
+- _addx_=add status:frozen
   name tbd; this is an important concept: such tasks cannot be completed, so they can denote categories (e.g. home, work) or activities (e.g. play piano, go outside) which can turn a task manager into a time manager
 
 This allows the user to define and redefine the commands without any programming. It provides insights into existing inner workings and makes sure that internals are accessible for power use.
@@ -67,21 +67,46 @@ These commands need to be hardcoded, they can't be specified as simple aliases:
 
 The parameters for commands are pre-parsed separately, which allows custom simplified syntax. A separate config file specifies the properties with allowed values and potential shorthands, e.g.
 ```
-scheduled.name=Scheduled
-scheduled.label=Sched.
-scheduled.type=date
-scheduled.shorthand=sch
+[property]
+	scheduled.name=Scheduled
+	scheduled.label=Sched.
+	scheduled.type=date
+	sched=scheduled
 
-size.name=Size
-size.values=-,s,m,l
-size.shorthand=s
+	size.name=Size
+	size.values=-,s,m,l
+	s=size
+
+[tag]
+	big=size:l
+
 ```
 
-- **name** is for display in detailed info
+- **name** is for display in detailed info (Default: property identifier with first letter uppercased)
 - **label** is used as column header for reports - default: _name_
 - **type** is used to potentially parse and translate the value - default: text (e.g. a date type will transform "5:00" to add the current date or even translate it to a timestamp - maybe even use the `date` command here?)
 - **values** can define allowed values
-- **shorthand** can specify an alternative way to specify this property on the commandline, e.g. when adding a new task
+
+### Recurrence
+
+State values: waiting, open, frozen, repeat, done, deleted (could partially be implemented with tags?)
+
+It is hard to get repeating tasks right. Every task manager I have seen so far implements it differently, and most task managers lack support for different use-cases.
+
+So instead of a rigorous system, I want it to be flexible. Every property with the date type will use recurrence, as long as the state of the task is set to `repeat` and the value of the property is set relatively (e.g. `2d` rather than `2020-08-24`). For that to work, the input needs to work a bit differently from the output: The date value that is displayed in reports and the like is always absolute, so it needs an internal, calculated value, while the original value has to be retained even if a task is not repeating, since it might later be set to repeat.  
+As in Todoist, appending a bang to the relative value will make the recur relative to the creation of the task, rather than the previous value of this property.
+
+The task managers I have seen so far assign some kind of common id to all instances of recurring tasks. I don't really see the point here - why not simply update the values of the current task rather than marking it done and creating a new one? The case where I want to modify a single occurrence in an incompatible way seems really rare.  
+Let's take the case of a weekly event that is moved by an hour once. It would be defined like this:
+
+	sched!moT18 due!moT18
+
+If `scheduled` and `due` are equal, the item is treated as an appointment. The `T` in between separates date and time. `state:repeat` is implied by the bangs inbetween, unless you explicitly instantiate it as frozen.  
+I can now modify this task once:
+
+	due:T19
+
+Which only updates the date of this occurrence. No need for multiple instances.
 
 ### Reports
 
