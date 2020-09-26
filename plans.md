@@ -33,7 +33,7 @@ Maybe prefix internal values (ulid and state) with underscore. Does no interpret
 
 ## The task manager - [porcelain][plumbing]
 
-Name ideas: Taskforc/Tofo
+Name ideas: Taskforc/Tafo
 
 Basically a parser & visualizer with a few quirks.
 
@@ -41,7 +41,7 @@ Unknown commands are passed on to the plumber with potential parameter modificat
 
 Reports & parameter configurations should support some kind of inheritance, i.e. allowing to create a new property/report that initially uses all values from its ancestor.
 
-Automatically generates short ids for new tasks based on description - first initials, then following letters in case of collisions (e.g. "al" for "Arch Linux setup"), length may depend on whether there is a parent (root tasks get single letter if possible) unless an id is explicitly set.
+Automatically generates short user-ids for new tasks based on description - first initials, then following letters in case of collisions (e.g. "al" for "Arch Linux setup"), length may depend on whether there is a parent (root tasks get single letter if possible) unless a user-id is explicitly set.
 
 ### Commands
 
