@@ -20,6 +20,7 @@ My problem is that I don't trust any of the systems I am currently using:
 - head: I forget things, short-term memory limited
 - paper: many slips flying around, can get lost easily
 - CLIs: too verbose to use, didn't get me the information I needed in time
+- web: too many clicks, too slow, not available offline, often unflexible
 
 # Design
 
@@ -27,9 +28,10 @@ The most important rule: Everything is a task. There is nothing else.
 
 Projects, Areas, Epics - they can all be mapped onto tasks, and doing so will allow you to leverage the same toolset on everything.
 A project or epic is a completable task with subtasks - it can itself be a subtask.  
-If you want to divide your task list into areas, these can simply be uncompletable tasks at the root level.
+To divide your task list into areas, simply put everything under uncompletable (see task type activity) root tasks.
 
-With everything being a task, areas and projects can also have all kinds of tags and attributes. And then subtasks may inherit these attributes (particularly tags).
+With everything being a task, areas and projects can also have all kinds of tags and attributes.
+And then subtasks may inherit these attributes (particularly tags).
 
 More fundamentals:
 - UNIX philosophy: use plain text is possible, separate into independent modules
@@ -87,9 +89,21 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
 # Links
 
 [taskwarrior]: https://taskwarrior.org/  
-- https://tasklite.org/related.html: List of CLI-oriented productivity systems  
+
+## Discussions
+- https://kolaente.dev/vikunja/api/issues/1198: 
+  Thoughts on Vikunja, my new hope.
+- https://github.com/lyz-code/pydo/issues/73: 
+  Short discussion on a beta-level tool with convenient short ids.
+- https://www.wired.com/2016/03/best-to-do-list-app/: 
+  Maybe Technology won't help, after all...
+
+## Projects
+- https://codeberg.org/equilibrium/equilibrium: 
+  A Haskell project I started to link task managers,
+  unfortunately abandoned by now.
+- https://tasklite.org/related.html: 
+  List of CLI-oriented productivity systems  
   Should have a look at:
-  - org mode
+  - org mode (agenda)
   - taskell
-- https://github.com/lyz-code/pydo: new tool, short ids
-- https://www.wired.com/2016/03/best-to-do-list-app/: Why technology 
