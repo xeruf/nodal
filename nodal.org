@@ -1,0 +1,230 @@
+#+title: Nodal
+* Nodal - A new Paradigm for Project and Knowledge Management
+** Abstract
+Current Project Management tools
+do neither adequately represent
+the complexities of modern development cycles
+nor leverage the power
+of modern processors and paradigms
+to empower humans for effectiveness.
+# to do their best
+# This paper outlines
+This is why I want to outline
+a new Wholesome Application Lifecycle Management approach
+where all data is captured in a single source of truth
+and can be viewed and edited
+from the preferred perspective of each user.
+
+Recently we have heard horror stories of businesses
+investing millions to integrate renowned software solutions
+yet achieving nothing but frustration.
+It is time to liberate our minds.
+We need the Power of Atlassian
+with the Flexibility of Notion
+and the Freedom of Open Source.
+** Paradigms
+*** Two Current Approaches
+I see two basic approaches shaping up,
+which may be integrated:
+Tasks as communication,
+and tasks as notes.
+
+The former is often inadequately attempted in chat tools people already use -
+team chat such as Zulip or Slack,
+or instant messengers -
+where action items quickly get lost.
+A more thought-out appraoch is [[id:valueflows][Valueflows]],
+implemented in software solutions such as [[id:bonfire][Bonfire]]
+based on [[id:fediverse][ActivityPub]] as communication.
+
+The latter can be seen in "One Big Text File" (OBTF),
+the idea of tracking everything relevant to oneself at the current time
+such as todos and notes
+in a single plain text file,
+often combined with powerful editors and command-line tools.
+There are also more user-friendly tools,
+Notion and Org-Mode being prime examples:
+Both allow outlining of hierarchies
+which contain notes and tasks interchangeably.
+*** The Task Tree
+I want to focus on the latter approach,
+but rethink it from the ground up.
+For that,
+I deem a typical linux filesystem a useful metaphor:
+1. Under the hood, files and directories are both the same - extensions of the basic "inode".
+2. There is a single root to all files accessible on the system ("/").
+3. Externally shared files, be it from network shares or physical devices,
+   can be mounted into any path of the system.
+4. A file can be made accessible from multiple locations
+   through either a link or a bind mount.
+
+Let me elaborate how each of these points applies to Task and Project Management:
+**** 1. Everything is a Node
+Humans have come up with all kinds of classifications and categorizations and structures for tasks:
+Namespaces, lists, projects, epics, stories and so on.
+
+While these might be useful in a specific context, project,
+or maybe just to a specific person,
+a good tool should be agnostic to these,
+accepting the imprint of the user.
+# Missing good comparison which emphasizes general production with customization by user
+Just like a good knive can be sharpened to the delight of its user.
+Just like an axe is not specialized on the type of tree it may cut.
+
+So what is the basic building block in project management?
+For a long time, I assumed it was the task,
+distinguishing between completable and non-completable tasks,
+the latter forming something akin to namespaces and lists.
+But recently I have come to realize
+that tasks do not become irrelevant at completion -
+quite the opposite,
+fruitful work produces valuable task discussions and descriptions
+which deserve to be preserved
+as a kind of wiki or FAQ,
+a knowledge base.
+
+To achieve this,
+we need to lift our focus off
+of the structure we have learned tasks have:
+Title, state, description, tags, further attributes and potentially discussions.
+If instead knowledge is the basic building block,
+Everything is a node: The title, the description, the discussion thread.
+A node is merely a string,
+potentially with attributes,
+unveiling its potential only when linked to others.
+***** Saving the world
+Let us look at an example:
+In our Project "Save the World" we want to "Make a Plan"
+and then "Execute the Plan".
+Each of these three points is in itself a node,
+with the latter two subnodes of the first.
+These should also have a state attribute
+which can be modified along the way,
+unlike the project, which,
+contrary to our hopes,
+is not something that is ever complete,
+so there is no point in tracking completion
+(more mundane examples would be "Personal Development" or "Practice Music",
+nodes that represent areas of life rather than concrete actions).
+
+For the first action item,
+we can create a subnode,
+which at first might be a simple outline
+and then change into a full-fledged plan.
+As this is textual content that changes with time,
+it should be version-controlled
+and available for real-time collaboration.
+Now when viewing the parent node,
+the interface might display the root node atop,
+below it our project,
+then centrally the task we are viewing with its attributes
+and below that the content of its immediate children
+or whatever number of layers is deemed sensible.
+
+In the execution,
+it is likely that queries and discussions come up.
+Each of these should be created as a completable subnode
+naming the topic,
+with further subnodes for the actual discussion.
+This way arguments can be dissected in an organized fashion
+# can be held structured(ly?)
+and results preserved with their decision process.
+**** 2. I am (G)Root
+With nodes and their relations as foundation,
+especially parent-child,
+we need to consider how to make these accessible.
+Simply put,
+all nodes that do not have another parent
+will be parented by the root node,
+which is your user profile.
+Now that's interesting, huh?
+I am also a node?
+Exactly!
+**** 3. Sharing and Mounting
+Thinking of the structure,
+we will want to store these nodes in a graph database.
+Now, sharing a node to another user
+under the hood just means connecting it to their user profile.
+
+Then this user can decide
+whether to move the node
+into a different position within their tree,
+just like a shared folder in common cloud file storage solutions.
+# Google Drive, Nextcloud
+**** 4. Polynomial Relationships
+Since we have already established the graph database,
+we can leverage its full power to do something unconventional:
+Give a task multiple parents.
+
+Of course we already kinda do this
+when we share a task to another user,
+but here I am referring to your own hierarchy.
+Quite often hierarchies are not so clear,
+something we painfully experienced
+in our business use of Zulip,
+which requires you to decide the receipients of a message
+by posting it into a stream.
+** Ideas
+# Plantuml wireframes
+
+Labels as Properties
+-> dynamic interface
+
+https://kolaente.dev/vikunja/frontend/issues/537#issuecomment-39747
+Kanban config options:
+- group by: assignee, property (label group, status, ...), date, parent task
+- display levels: 1-X (range), only leaves
+- display text levels: 1(self)-X
+- ordering direction/sorting
+
+# Application Lifecycle Management (ALM)
+*** Copied Write-Ups
+I have thought more about it, and I think the way to go will be to have no fixed Kanban view. Instead one should be able to create a kanban view grouped by a desired property, which might be the task status but could also be an assignee or the like, like in Notion.
+Either way, there should be a way to add more task status options through which a task can be moved with one click as outlined above.
+
+
+That whole document might hold some interesting points for you, but let me mention my current use-cases:
+
+    I add a tag to all tasks in a list. Rather than tasks, it might make more sense to have lists be tags, and the lists are simply predefined views. This allows for more flexibility when juggling many lists.
+
+    I am now creating a kanban board that essentially lists all lists and provides some details and status information about them. If lists were tasks, I could add them there directly, avoiding redundant descriptions and providing easier back and forth navigation.
+
+In the end, I don't see why lists have to be a separate entity, just as checklists. It is adding complexity and creating artificial restrictions at the same time, for no gain.
+And the UI can still stay mostly as it is, but rather than imposing, what it shows you are merely sane defaults to be changed at your mercy.
+It is a simplification in the backend that brings great flexibility for the future.
+To bring both points together: Namespaces could be tags, Lists could be Root Tasks and belong to multiple namespaces with tags.
+
+Then one could even simplify sharing, because by adding a tag to a person (plus a RO/RW/Admin value) you can share them all tasks belonging to that tag, no need for different scopes like namespaces/lists.
+Only public sharing links need to be extra, which can be created for any view of any task - you could create Kanban or Gantt views for subtasks (epics) of a root task (project) and share them, because every task can be turned into its own view.
+Welcome to Productivity and Management Utopia.
+
+
+
+
+Let me lay out my ideal structure and current workarounds,
+illustrating the superiority of this approach:
+With everyone in the core team of our company
+I want to share an uncompletable root task (“namespace”).
+
+This task has a subtask for each project (“list”),
+which might be shared with additional collaborators.
+These projects can themselves be displayed on a Kanban board
+(currently we have a separate list for that, linking to each project)
+showing the status of the project (e.g. Ideation, Planning, Active, Completed) and providing a grand overview.
+
+For each project, subtasks might contain areas (e.g. UX, Backend, Frontend)
+or epics (user login, …) or for small projects straight individual tasks.
+If it represents an area, it might be shared with a dedicated team for that area
+with its own views.
+
+
+
+
+Just to clarify why I am so adamant about this:
+We discovered Vikunja in our unhappiness with existing project and task management software, as we need a tool with a single source of truth but many views/facets - for planners, stakeholders, designers, scrum managers, controllers, developers, QA, leadership...
+
+We look at Vikunja and see not just a nice task manager, but the possibility to disrupt the whole torpid market of modeling development processes digitally, displacing the annoying proprietary giants like Atlassian and narrow-minded tools like Wekan while also offering everything that is nice for personal use, like Todoist, and adding unprecedented integration with other tools such as Gitea, Wikis & co.
+
+Once the resources are there we will implement this vision through open-source, and we would be happy for Vikunja to be its foundation and its developers part of the team :)
+
+However, I have also thought about the architecture and we might actually need to redo the data models at that point, to use a graph database like ArangoDB - that way everything is not just a task but a node, which can be tagged through edges/connections. Anyways, I'll leave that for my soon-to-come blog entry...
