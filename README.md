@@ -1,10 +1,25 @@
-Months ago, I started my quest to refine task management. I was using Todoist at the time and wasn't satisfied.
-I barely trusted it anymore - it was lacking capabilities I wanted, such as a wait date as well as a difference between scheduled and due. Since it is a proprietary service, extending it would have been very challenging.
+# How-Todo?
+
+This write-up and the accompanying markdown-files
+are from 2020,
+outlining my original thoughts and vision
+amidst my studies as a Software Engineer.
+
+I have since added Org-Files in 2022,
+which outline a more grand picture
+but also more refined details.
+
+## Introduction
+
+Months ago, I started my quest to refine task management.
+I was using Todoist at the time and wasn't satisfied.
+I barely trusted it anymore - it was lacking capabilities I wanted, such as a wait date as well as a difference between scheduled and due.
+Since it is a proprietary service, extending it would have been very challenging.
 I was also growing more accustomed and comfortable with the terminal and the UNIX philosophy.
 
 So I started exploring the CLI task managers and found [taskwarrior] - it seemed the perfect tool at first glance, with great customizability and control. But it too turned out to have some fundamental flaws.
 
-# The concept of trust
+## The Concept of Trust
 
 I believe I first heard CGP Grey using this term, but I have not found it anywhere on the Internet with this meaning.
 
@@ -22,7 +37,7 @@ My problem is that I don't trust any of the systems I am currently using:
 - CLIs: too verbose to use, didn't get me the information I needed in time
 - web: too many clicks, too slow, not available offline, often unflexible
 
-# Design
+## Design
 
 The most important rule: Everything is a task. There is nothing else.
 
@@ -37,7 +52,7 @@ More fundamentals:
 - UNIX philosophy: use plain text is possible, separate into independent modules
 - Complete control: Inbuilt reports and attributes should use available configuration, so that the user can change fundamental parts of the system
 
-## Task types
+### Task types
 There are essentially 4 types of things we do:
 - tasks: things to be done once e.g. hand in an assignment, fix a bug
 - activities: can't be completed e.g. browse the internet, gaming, spend time with family
@@ -54,24 +69,24 @@ These basic types also incorporate other types:
 
 Since "task" is one of these types, entities of any of these types can be called "items" within the implementation to avoid confusion.
 
-## User Stories
+### User Stories
 - areas
 - housework projects
 - GTD
 - Agile
 
-### Reports I need
+#### Reports I need
 - Review active projects
 - Find out tasks to batch when going out
 - Find things I can do when I am (outside watching the babies e.g. cut nails | focused, wanting to do some (writing|programming) in the morning | unfocused in the afternoon e.g. check mails | taking a break from work on the computer e.g. do laundry | eating/snacking something e.g. watch a video/read a paper | listening to an audiobook e.g. digging, hang out the laundry)
 
-# Inspirations
+## Inspirations
 
-## Taskwarrior
+### Taskwarrior
 
 I have been using [taskwarrior] for a few weeks now, but I am already starting to lose trust again. I don't work on most of the tasks I've entered, and if I do, I rarely remember checking them off.
 
-### Issues
+#### Issues
 
 - A big issue holding me back is a missing notion of subtasks. You either have to use projects, dependencies or create a complete custom hack - either a script or hook. This also makes entering tasks more verbose as I have to specify multiple tags repeatedly which could otherwise simply be inherited.
 - Recurrence is a longstanding issue, but can somewhat be solved by plugins: https://github.com/tbabej/task.shift-recurrence and https://github.com/JensErat/task-relative-recur
@@ -80,17 +95,17 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
 - Keeping all reports aligned with custom attributes is a hassle, since you can't base reports off each other
 - ids change whenever a task is completed, so you constantly have double-check or might complete a wrong task
 
-### What it does well
+#### What it does well
 
 - Great customizability with reports, UDAs, DOM etc
 - Great extendability with hooks
 - Integrates with many tools (e.g. vimwiki, powerlevel10k, timewarrior)
 
-# Links
+## Links
 
 [taskwarrior]: https://taskwarrior.org/  
 
-## Discussions
+### Discussions
 - https://kolaente.dev/vikunja/api/issues/1198: 
   Thoughts on Vikunja, my new hope.
 - https://github.com/lyz-code/pydo/issues/73: 
@@ -98,10 +113,10 @@ I have been using [taskwarrior] for a few weeks now, but I am already starting t
 - https://www.wired.com/2016/03/best-to-do-list-app/: 
   Maybe Technology won't help, after all...
 
-## Projects
+### Projects
 - https://codeberg.org/equilibrium/equilibrium: 
-  A Haskell project I started to link task managers,
-  unfortunately abandoned by now.
+  A Haskell project I started to connect task managers,
+  unfortunately abandoned now.
 - https://tasklite.org/related.html: 
   List of CLI-oriented productivity systems  
   Should have a look at:

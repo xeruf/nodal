@@ -1,0 +1,223 @@
+#+title: Bonfire
+* [2022-12-07] Federating Everything
+** Groups
+In response to my original write-up below,
+I have been pointed towards a more appropriate distinction
+of groups and tags:
+
+A group is bound to an instance
+and has a Fediverse handle.
+This allows it (and thus its members) to be mentioned
+and ensures communication stays private
+within a private group
+as it never leaves the instance.
+
+(Hash)Tags on the other hand
+are instance-independent
+and cannot have members,
+only subscribers.
+** [[id:bonfire][Bonfire]] as a Task Manager
+[[id:fediverse][ActivityPub]] is perfect for interactive task management
+close to reality.
+Let me explain.
+
+When a message is posted,
+one might select its type:
+note, task, poll, offer, request and so on.
+Each of these types is provided by an extension,
+but underneath is a common schema which allows for graceful fallbacks
+if no matching extension is available.
+
+One option are textual keywords,
+combined with metadata.
+For example,
+a task called "Finish the presentation"
+with a deadline at the 8. December
+might be represented as:
+#+begin_quote
+Task: Finish the presentation
+Due: 2022-12-08
+#+end_quote
+But with an appropriate extension it might be displayed as:
+#+begin_quote
+⃞ Finish the presentation 📅 Due Tomorrow
+#+end_quote
+
+Ticking that checkbox would send an automatic message,
+optionally prompting for a comment which might then be sent as:
+#+begin_quote
+Complete: 2022-12-07T19:48
+
+Generated through reveal.js from Emacs Org-Mode, uploaded files to Nextcloud at LINK.
+#+end_quote
+The timestamp might be superfluous,
+as it should match the send time of the message.
+Detecting such a comment under the task,
+the original message would display differently:
+#+begin_quote
+✅ Finish the presentation 📅 Completed Today
+#+end_quote
+
+An offer or request could be handled very similarly,
+except that it usually involves multiple parties
+and should use different icons.
+
+By including a mention,
+the task may be assigned to somebody
+who can then also complete it.
+Optionally the extension could allow anybody
+or a certain group of users
+to complete any task.
+
+Posts on the Fediverse cannot be modified
+and thus neither edited nor reassigned directly.
+This limitation is actually a great feature,
+as it always preserves an accurate history of what happened.
+
+Descriptions, clarifications, findings and discussions
+can easily be added as comments,
+providing tight feedback loops.
+Tasks may also be reassigned or rescheduled if permitted,
+simply by sending a message with the appropriate syntax,
+for example:
+#+begin_quote
+Assign: Somebody
+Due: 2022-12-12
+#+end_quote
+This will mark the initial task as ⊟ obsolete
+(one could even include a completion date,
+thus the original task is marked completed -
+for example if one department is done and pushes it to another).
+This task then copies all non-changed properties
+and transforms the message into a new task:
+#+begin_quote
+⃞ Finish the presentation 📅 Due Monday 👤 Somebody
+#+end_quote
+It might be sensible to add an indicator here
+that this is an update of the parent task,
+but that is not of primary concern.
+
+With this,
+tasks and communication can naturally intertwine,
+as one often acompasses the other.
+Notifications on new messages
+and a task dashboard
+ensure that nothing gets lost.
+
+In the end,
+the Fediverse is also just a hierarchical graph database :)
+
+** Hooking Mails into the Fediverse
+When we have this universal toolbox,
+we want to be as inclusive as possible.
+E-Mail persists as the most ubiquoutus federated protocol for decades,
+with tools and workflows available for any platform imaginable.
+
+So similar as in Zulip,
+communicating with an instance
+entirely by E-Mail
+would be a great enabler.
+
+This would entail
+either running an own SMTP server
+or polling an inbox,
+with the latter likely being preferrable due to less complexity.
+Either way, this does not have to be a locked-in decision
+as it should also be handled by an extension.
+
+Then a domain or subdomain
+should be entirely reserved as gateway,
+handled by the instance of with a star-redirect to its inbox.
+It could thus both send and receive with E-Mail-Adresses
+that equal the handle in the Fediverse.
+It can accept private and group messages
+if a match is found,
+otherwise converting the username to a tag.
+
+There should be filtering measures,
+choosing between an Allowlist and Blacklist
+which can match individual adresses
+as well as whole domains.
+It could be sensible to base this
+on the moderation tools of the ActivityPub instance
+to block spam from both protocols simultaneously.
+
+Once an E-Mail is known to the instance,
+it will receive responses on its own posts
+and on mentions of its handle,
+which might correspond to a fediverse handle as well.
+There should also be the option
+(in the mail footer, just like with a proper mailing list)
+to adjust these notifications
+and subscribe to every new message
+or a particular group or hashtag,
+just like a registered user.
+
+This makes the Fediverse truly accessible to every generation.
+* [2022-04-07] Making Team Chat Simple, Social and Scalable
+** Analogies :noexport:
+Ideally combines [[id:fediverse][Fediverse]] and [[id:messengers][Messengers]]
+
+- Zulip :: structured communication, discussion, internal announcements
+- Fedi :: resource sharing, inspiration, connection
+
+Zulip is to jour fixe what Fedi is to huddle
+** Current Issues
+Unforunately, Zulip does not work too well with our startup:
+1. the separation into channels is often not clear and can seem artificial due to our integrated nature
+2. people often fail to determine the appropriate topic
+3. participants feel compelled to read everything
+4. the mobile experience takes too many clicks for a quick chat compared to a messenger
+5. many externals that struggle to use it well, and guest accounts on many platforms worsen that experience
+** Enter Real [[id:fedisocial][Social Networks]]
+In ActivityPub, every post is a top-level-post, so no responses are lost in threads.
+Nonetheless, one can reply to a post,
+continuing a conversation to arbitrary depth without the need for a fixed structure
+(fixes 2, as topics arise from reply chains -
+bottom-up rather than top-down/on-demand rather than at the outset -
+sparing cognitive load).
+
+People can be pinged, posts can seemlessly switch from public to private or internal
+(or even split up for topics with both public relevance and private information),
+enabling integration of outwards social-media representation in the normal flow of communication.
+With public posts, external collaborators can join in with an account from another server (fixes issue 5),
+and if both server support hashtag permission management, even on sensitive topics.
+
+*** Hashtags
+But most important of all will be the handling of hashtags for classification and authorization:
+Every post requires at least one hashtag, which will function similar to a Zulip Stream/Slack Channel/Mailing List/...
+(fixes issue 1, as there can be multiple categorizing hashtags)
+And they will also make groups superfluous.
+
+Many hashtags will probably come and go, as is typical in social networks.
+But any hashtag can be subscribed to, at which point it also functions as a shared channel -
+without anyone who does not join having to be afraid of missing anything,
+as they can still see the content in relevant replies, mentions, subscriptions of other people and the global timeline.
+
+The icing on the cake is permission management:
+Posts with a specific hashtag could be restricted to subscribers, which are of course invite-only,
+so even sensitive topics can be discussed.
+And last but not least, subscribed hashtags need an unread count - but only these (solves 3)!
+
+The unread count on muted channels in Zulip induces FOMO and makes people use them the other way around:
+Muting streams they need so they don't mindlessly check the messages there...
+
+*** Conclusion
+With ValueFlows from Bonfire, these posts can encompass tasks and more,
+creating a single tool where ideas, discussions, tasks and updates (internal and external)
+can be posted and collaborated on hassle-free,
+while being available in an open format for further processing!
+
+Thankfully, there is already a plethora of intuitive apps available at least for [[id:mastodon][Mastodon]]-compatible APIs,
+enabling a personalized mobile experience (fixes issue 4).
+** Alternatives
+I am considering [[id:xmpp][XMPP]] via Movim, too, as it provides a familiar messenger experience, but it has one big issue: \\
+Posts are confined to groups.
+This means that new participants actively need to seek out the groups they want to be part of,
+always have to decide where to post and thus sometimes crosspost.
+Groups come and go, thus relevant content is easily missed,
+as is typical in Slack and other Messaging solutions.
+
+The biggest abomination of this are Telegram groups,
+which are used like a bad social network
+with constant annoying unstructured crossposts.

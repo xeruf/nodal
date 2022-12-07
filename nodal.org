@@ -165,19 +165,22 @@ in our business use of Zulip,
 which requires you to decide the receipients of a message
 by posting it into a stream.
 ** Ideas
-# Plantuml wireframes
+Plantuml wireframes
+
+Application Lifecycle Management (ALM)
 
 Labels as Properties
 -> dynamic interface
 
-https://kolaente.dev/vikunja/frontend/issues/537#issuecomment-39747
 Kanban config options:
 - group by: assignee, property (label group, status, ...), date, parent task
 - display levels: 1-X (range), only leaves
 - display text levels: 1(self)-X
 - ordering direction/sorting
 
-# Application Lifecycle Management (ALM)
+See also
+https://kolaente.dev/vikunja/frontend/issues/537#issuecomment-39747
+
 *** Copied Write-Ups
 I have thought more about it, and I think the way to go will be to have no fixed Kanban view. Instead one should be able to create a kanban view grouped by a desired property, which might be the task status but could also be an assignee or the like, like in Notion.
 Either way, there should be a way to add more task status options through which a task can be moved with one click as outlined above.
