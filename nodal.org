@@ -23,7 +23,7 @@ We need the Power of Atlassian
 with the Flexibility of Notion
 and the Freedom of Open Source.
 ** Paradigms
-*** Two Current Approaches
+*** Bridging Tangiental Approaches
 I see two basic approaches shaping up,
 which may be integrated:
 Tasks as communication,
@@ -46,6 +46,7 @@ There are also more user-friendly tools,
 Notion and Org-Mode being prime examples:
 Both allow outlining of hierarchies
 which contain notes and tasks interchangeably.
+
 *** The Task Tree
 I want to focus on the latter approach,
 but rethink it from the ground up.
@@ -92,7 +93,7 @@ Everything is a node: The title, the description, the discussion thread.
 A node is merely a string,
 potentially with attributes,
 unveiling its potential only when linked to others.
-***** Saving the world
+***** Saving The World
 Let us look at an example:
 In our Project "Save the World" we want to "Make a Plan"
 and then "Execute the Plan".

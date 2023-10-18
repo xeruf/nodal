@@ -1,0 +1,20 @@
+#+title: Nostr
+What would a basic client to Nostr or any protocol need
+to enable this kind of integrated communication?
+What are the basics?
+
+* Basics
+** Posting
+- referential replies (unsure about multiple parents)
+- mentions by username
+- adding hashtags in flowing text
+- requiring a hashtag for every post
+- ability to create groups (one relay per group?) and easily choose target
+  -> communication with customers, or internal to specific teams, or publicly
+** Viewing
+- "subscribe" to specific hashtags - only view their content in the default feed
+- filtering post list by hashtag by simply clicking on it in the sidebar
+- full-text-search
+** Advanced
+- relay has to archive all messages
+- forwarding to E-Mail (subscriber to a relay, both ways ideally) - E-Mail-Gateway

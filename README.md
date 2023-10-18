@@ -1,13 +1,11 @@
 # How-Todo?
 
-This write-up and the accompanying markdown-files
-are from 2020,
+This write-up and the accompanying markdown-files are from 2020,
 outlining my original thoughts and vision
 amidst my studies as a Software Engineer.
 
-I have since added Org-Files in 2022,
-which outline a more grand picture
-but also more refined details.
+In 2022 I added Org-Files to this repository,
+which outline a grander picture with more refined details.
 
 ## Introduction
 
@@ -21,15 +19,18 @@ So I started exploring the CLI task managers and found [taskwarrior] - it seemed
 
 ## The Concept of Trust
 
-I believe I first heard CGP Grey using this term, but I have not found it anywhere on the Internet with this meaning.
+I believe I first heard CGP Grey using this term,
+but I have not found it anywhere on the Internet with this meaning.
 
-Trusting a digital tool, such as a task manager, means you rely on it. If you don't trust a tool, you will use it less and tend towards alternatives e.g. pen and paper.
-To build trust with a task manager, you need to put all your tasks in it and set it up in a way that fits your workflow.
+Trusting a digital tool, such as a task manager, means you rely on it.
+If you don't trust a tool, you will use it less and tend towards alternatives e.g. pen and paper.
+To build trust with a task manager,
+you need to put all your tasks in it and set it up in a way that fits your workflow.
 
 For that, a task management system needs to enable these three actions:
 - quickly capture new information
 - planning & reviewing
-- retrieving tasks that should be done and can be done in the current context
+- retrieving tasks relevant to the current context
 
 My problem is that I don't trust any of the systems I am currently using:
 - head: I forget things, short-term memory limited
@@ -39,7 +40,8 @@ My problem is that I don't trust any of the systems I am currently using:
 
 ## Design
 
-The most important rule: Everything is a task. There is nothing else.
+The most important rule:
+Everything is a task. There is nothing else.
 
 Projects, Areas, Epics - they can all be mapped onto tasks, and doing so will allow you to leverage the same toolset on everything.
 A project or epic is a completable task with subtasks - it can itself be a subtask.  
@@ -61,7 +63,8 @@ There are essentially 4 types of things we do:
 
 Even though they won't be clearly distinguished by a single property, they will be mapped through some default properties:
 - Inspired by [tasklite](https://tasklite.org/concepts.html), habits have a `repeat` property while chores have a `recur` property - both can be frozen.
-- Tasks and activities may be distinguished by a `size` property, where activities have a special size value of `-`, marking them incompletable. Alternatively, activities may be prefixed with a star as it is done in Todoist
+- Tasks and activities may be distinguished by a `size` property, where activities have a special size value of `-`, marking them incompletable.
+  Alternatively, activities may be prefixed with a star as it is done in Todoist
 
 These basic types also incorporate other types:
 - an area is simply an activity with subtasks

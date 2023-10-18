@@ -16,6 +16,7 @@ as it never leaves the instance.
 are instance-independent
 and cannot have members,
 only subscribers.
+
 ** [[id:bonfire][Bonfire]] as a Task Manager
 [[id:fediverse][ActivityPub]] is perfect for interactive task management
 close to reality.
@@ -120,22 +121,21 @@ would be a great enabler.
 
 This would entail
 either running an own SMTP server
-or polling an inbox,
+or polling an inbox via IMAP,
 with the latter likely being preferrable due to less complexity.
 Either way, this does not have to be a locked-in decision
 as it should also be handled by an extension.
 
 Then a domain or subdomain
 should be entirely reserved as gateway,
-handled by the instance of with a star-redirect to its inbox.
+managed by the Bonfire instance with a star-redirect to a main inbox.
 It could thus both send and receive with E-Mail-Adresses
 that equal the handle in the Fediverse.
-It can accept private and group messages
-if a match is found,
+It can accept private and group messages if a match is found,
 otherwise converting the username to a tag.
 
 There should be filtering measures,
-choosing between an Allowlist and Blacklist
+choosing between an Allowlist and Denylist
 which can match individual adresses
 as well as whole domains.
 It could be sensible to base this
@@ -154,6 +154,8 @@ or a particular group or hashtag,
 just like a registered user.
 
 This makes the Fediverse truly accessible to every generation.
+
+** The Importance of Fluffy Mobile Apps
 * [2022-04-07] Making Team Chat Simple, Social and Scalable
 ** Analogies :noexport:
 Ideally combines [[id:fediverse][Fediverse]] and [[id:messengers][Messengers]]
@@ -162,20 +164,23 @@ Ideally combines [[id:fediverse][Fediverse]] and [[id:messengers][Messengers]]
 - Fedi :: resource sharing, inspiration, connection
 
 Zulip is to jour fixe what Fedi is to huddle
+
 ** Current Issues
 Unforunately, Zulip does not work too well with our startup:
-1. the separation into channels is often not clear and can seem artificial due to our integrated nature
-2. people often fail to determine the appropriate topic
+1. the distinction into channels/streams is often blurry and can seem artificial due to our integrated nature
+2. people often fail to find or name the topic appropriately
 3. participants feel compelled to read everything
 4. the mobile experience takes too many clicks for a quick chat compared to a messenger
 5. many externals that struggle to use it well, and guest accounts on many platforms worsen that experience
+
 ** Enter Real [[id:fedisocial][Social Networks]]
-In ActivityPub, every post is a top-level-post, so no responses are lost in threads.
+In ActivityPub, every post is a top-level-post,
+so no responses are lost in threads.
 Nonetheless, one can reply to a post,
 continuing a conversation to arbitrary depth without the need for a fixed structure
-(fixes 2, as topics arise from reply chains -
-bottom-up rather than top-down/on-demand rather than at the outset -
-sparing cognitive load).
+(fixes issue 2, as topics arise from reply chains -
+bottom-up rather than top-down, on-demand rather than at the outset -
+avoiding upfront cognitive overhead).
 
 People can be pinged, posts can seemlessly switch from public to private or internal
 (or even split up for topics with both public relevance and private information),
@@ -210,8 +215,11 @@ while being available in an open format for further processing!
 
 Thankfully, there is already a plethora of intuitive apps available at least for [[id:mastodon][Mastodon]]-compatible APIs,
 enabling a personalized mobile experience (fixes issue 4).
+
 ** Alternatives
-I am considering [[id:xmpp][XMPP]] via Movim, too, as it provides a familiar messenger experience, but it has one big issue: \\
+I considered [[id:xmpp][XMPP]] via Movim,
+as it provides a familiar messenger experience,
+but it has one big issue: \\
 Posts are confined to groups.
 This means that new participants actively need to seek out the groups they want to be part of,
 always have to decide where to post and thus sometimes crosspost.
